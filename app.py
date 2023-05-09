@@ -226,7 +226,6 @@ def plot_1_timeserie(
     fig.update_layout(
         xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
     )
-    fig.write_html(f"{filplassering}/{objektid}_{timeserie_navn}_{type_plot}.html")
 
 
 def plot_2_timeserie(
@@ -282,9 +281,7 @@ def plot_2_timeserie(
     fig.update_layout(
         xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
     )
-    fig.write_html(
-        f"{filplassering}/{objektid}_{timeserie_1_navn}_{timeserie_2_navn}_{type_plot}.html"
-    )
+
 
 def plot_3_timeserie(
     timeserie_1,
@@ -355,9 +352,6 @@ def plot_3_timeserie(
     fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
     fig.update_layout(
         xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
-    )
-    fig.write_html(
-        f"{filplassering}/{objektid}_{timeserie_1_navn}_{timeserie_2_navn}_{timeserie_3_navn}_{type_plot}.html"
     )
 
 
