@@ -573,8 +573,8 @@ class Energibehov:
     def standard_metode(self, lagring_obj):
         self._beregn_energibehov()
         #self._visualisering()
-        self._lagring(lagring_obj)
-        return self._nokkeltall()
+        #self._lagring(lagring_obj)
+        #return self._nokkeltall()
 
 # Ulike tiltak
 # --
@@ -633,8 +633,8 @@ class Fjernvarme:
     def standard_metode(self, lagring_obj):
         self._beregn_fjernvarme()
         #self._visualisering()
-        self._lagring(timeserie_obj=lagring_obj)
-        return self._nokkeltall()
+        #self._lagring(timeserie_obj=lagring_obj)
+        #return self._nokkeltall()
 
 # --
 class Grunnvarme:
@@ -687,8 +687,8 @@ class Grunnvarme:
     def standard_metode(self, lagring_obj):
         self._beregn_grunnvarme()
         #self._visualisering()
-        self._lagring(timeserie_obj=lagring_obj)
-        return self._nokkeltall()
+        #self._lagring(timeserie_obj=lagring_obj)
+        #return self._nokkeltall()
 
 # --
 class LuftLuftVarmepumpe:
@@ -736,8 +736,8 @@ class LuftLuftVarmepumpe:
     def standard_metode(self, lagring_obj):
         self._beregn_luft_luft_varmepumpe()
         #self._visualisering()
-        self._lagring(timeserie_obj=lagring_obj)
-        return self._nokkeltall()
+        #self._lagring(timeserie_obj=lagring_obj)
+        #return self._nokkeltall()
         
 
 # --
@@ -830,8 +830,8 @@ class Solproduksjon:
     def standard_metode(self, lagring_obj):
         self._calculate_whole_roof()
         #self._visualisering()
-        self._lagring(timeserie_obj=lagring_obj)
-        return self._nokkeltall()
+        #self._lagring(timeserie_obj=lagring_obj)
+        #return self._nokkeltall()
         
 
 # hovedmodul som tar inn energimix
