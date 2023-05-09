@@ -1,8 +1,5 @@
 import pandas as pd
 import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
 import requests
@@ -298,105 +295,6 @@ class Energibehov:
             termisk_makseffekt,
         )
 
-        FILPLASSERING = "plot"
-        EL_SPESIFIKK_FARGE = "#b7dc8f"
-        ROMOPPVARMING_FARGE = "#1d3c34"
-        TAPPEVANN_FARGE = "#FFC358"
-        plot_1_timeserie(
-            self.el_spesifikk_arr,
-            "Elspesifikt behov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=EL_SPESIFIKK_FARGE,
-        )
-        plot_1_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=TAPPEVANN_FARGE,
-        )
-        plot_1_timeserie(
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=ROMOPPVARMING_FARGE,
-        )
-        plot_1_timeserie(
-            self.el_spesifikk_arr,
-            "Elspesifikt behov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=TAPPEVANN_FARGE,
-            VARIGHETSKURVE=True,
-        )
-        plot_1_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=TAPPEVANN_FARGE,
-            VARIGHETSKURVE=True,
-        )
-        plot_1_timeserie(
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=ROMOPPVARMING_FARGE,
-            VARIGHETSKURVE=True,
-        )
-        # -- sammenstilte
-        plot_2_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR_1=TAPPEVANN_FARGE,
-            COLOR_2=ROMOPPVARMING_FARGE,
-        )
-        plot_2_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR_1=TAPPEVANN_FARGE,
-            COLOR_2=ROMOPPVARMING_FARGE,
-            VARIGHETSKURVE=True,
-        )
-        plot_3_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.el_spesifikk_arr,
-            "Elspesifikt behov",
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR_1="#1d3c34",
-            COLOR_2=EL_SPESIFIKK_FARGE,
-            COLOR_3=ROMOPPVARMING_FARGE,
-        )
-        plot_3_timeserie(
-            self.tappevann_arr,
-            "Tappevannsbehov",
-            self.el_spesifikk_arr,
-            "Elspesifikt behov",
-            self.romoppvarming_arr,
-            "Romoppvarmingsbehov",
-            self.objektid,
-            FILPLASSERING,
-            COLOR_1="#1d3c34",
-            COLOR_2=EL_SPESIFIKK_FARGE,
-            COLOR_3=ROMOPPVARMING_FARGE,
-            VARIGHETSKURVE=True,
-        )
-
     def _lagring(self, timeserier_obj):
         timeserier_obj.legg_inn_timeserie(timeserie=self.el_spesifikk_arr, timeserie_navn="El_spesifiktbehov")
         timeserier_obj.legg_inn_timeserie(timeserie=self.romoppvarming_arr, timeserie_navn="R_omoppvarmingsbehov")
@@ -435,23 +333,6 @@ class Fjernvarme:
         self.fjernvarme_arr = (self.termisk_arr) * self.VIRKNINGSGRAD
         self.df["Fjernvarme"] = self.fjernvarme_arr
 
-        FILPLASSERING = "plot"
-        FJERNVARME_FARGE = "#00FFFF"
-        plot_1_timeserie(
-            self.fjernvarme_arr,
-            "Fjernvarmedekning",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=FJERNVARME_FARGE,
-        )
-        plot_1_timeserie(
-            self.fjernvarme_arr,
-            "Fjernvarmedekning",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=FJERNVARME_FARGE,
-            VARIGHETSKURVE=True,
-        )
 
     def _nokkeltall(self):
         self.fjernvarme_aarlig = avrunding(np.sum(self.fjernvarme_arr))
@@ -531,14 +412,7 @@ class LuftLuftVarmepumpe:
         self.levert_fra_luft_arr = self.varmepumpe_arr - self.varmepumpe_arr/self.COP #todo : timevariert COP, da må vi også hente inn informasjon om utetemperatur
         self.kompressor_arr = self.varmepumpe_arr - self.levert_fra_luft_arr
         self.spisslast_arr = self.termisk_arr - self.varmepumpe_arr
-
-        FILPLASSERING = "plot"
-        KOMPRESSOR_FARGE = "#1d3c34"
-        LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
-        SPISSLAST_FARGE = "#FFC358"
-        plot_3_timeserie(timeserie_1=self.kompressor_arr, timeserie_1_navn="Strøm til varmepumpe", timeserie_2=self.levert_fra_luft_arr, timeserie_2_navn="Levert fra luft", timeserie_3=self.spisslast_arr, timeserie_3_navn="Spisslast", objektid=self.objektid, filplassering=FILPLASSERING, COLOR_1=KOMPRESSOR_FARGE, COLOR_2=LEVERT_FRA_LUFT_FARGE, COLOR_3=SPISSLAST_FARGE)
-        plot_3_timeserie(timeserie_1=self.kompressor_arr, timeserie_1_navn="Strøm til varmepumpe", timeserie_2=self.levert_fra_luft_arr, timeserie_2_navn="Levert fra luft", timeserie_3=self.spisslast_arr, timeserie_3_navn="Spisslast", objektid=self.objektid, filplassering=FILPLASSERING, COLOR_1=KOMPRESSOR_FARGE, COLOR_2=LEVERT_FRA_LUFT_FARGE, COLOR_3=SPISSLAST_FARGE, VARIGHETSKURVE=True)
-
+        
     def _nokkeltall(self):
         kompressor_aarlig = avrunding(np.sum(self.kompressor_arr))
         levert_fra_luft_aarlig = avrunding(np.sum(self.levert_fra_luft_arr))
@@ -729,18 +603,6 @@ class Energianalyse:
         self.df_before = positive_rows.sum(axis=1)
         self.df_after = self.new_df.sum(axis=1)
 
-        FILPLASSERING = "plot"
-        KOMPRESSOR_FARGE = "#1d3c34"
-        LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
-        SPISSLAST_FARGE = "#FFC358"
-
-        plot_1_timeserie(
-            self.new_df["El"],
-            "a",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=SPISSLAST_FARGE,
-        )
     def _nokkeltall(self):
         pass
 
