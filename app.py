@@ -899,7 +899,7 @@ class Energianalyse:
             self.solproduksjon_obj.standard_metode(lagring_obj=self.timeserier_obj)
         #--
         self._sammenstilling()
-        self._visualisering()
+        #self._visualisering()
              
     def _sammenstilling(self):
         df = self.timeserier_obj.df
