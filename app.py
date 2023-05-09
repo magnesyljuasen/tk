@@ -615,6 +615,7 @@ class Energianalyse:
 # flere bygg
 ANTALL_BYGG = 3
 st.title("Demo - Beregningsmodul Into Zero")
+st.write("Denne modulen beregner energibehov for ett bygg basert på areal og bygningsstandard. Deretter kan man velge energiforsyningstiltak for å dekke deler av behovet. Beregningsmodulen er planlagt utvidet med kostnader og CO2 utslipp. Den kan også utvides til flere bygg.")
 #lists
 objektid_list = [1, 2, 3]
 c1, c2 = st.columns(2)
