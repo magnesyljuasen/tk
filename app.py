@@ -187,173 +187,6 @@ def dekningsberegning(DEKNINGSGRAD, timeserie, over_under = "over"):
     if over_under == "under":
         return timeserie - tmp_liste_h
 
-# -- Plotting
-def plot_1_timeserie(
-    timeserie,
-    timeserie_navn,
-    objektid,
-    filplassering,
-    COLOR="#1d3c34",
-    VARIGHETSKURVE=False,
-):
-    if VARIGHETSKURVE == True:
-        y_arr = np.sort(timeserie)[::-1]
-        type_plot = "varighetskurve"
-    else:
-        y_arr = timeserie
-        type_plot = "timeplot"
-    x_arr = np.array(range(0, len(timeserie)))
-    fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR),
-        )
-    )
-    fig["data"][0]["showlegend"] = True
-    fig["data"][0][
-        "name"
-    ] = f"{timeserie_navn}: {int(round(np.sum(y_arr),0)):,} kWh | {int(round(np.max(y_arr),0)):,} kW".replace(
-        ",", " "
-    )
-    fig.update_xaxes(range=[0, 8760])
-    fig.update_yaxes(range=[0, max(y_arr) * 1.1])
-    fig.update_layout(barmode="stack")
-    fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
-    fig.update_layout(
-        xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
-    )
-
-
-def plot_2_timeserie(
-    timeserie_1,
-    timeserie_1_navn,
-    timeserie_2,
-    timeserie_2_navn,
-    objektid,
-    filplassering,
-    COLOR_1="#1d3c34",
-    COLOR_2="#4d4b32",
-    VARIGHETSKURVE=False,
-):
-    if VARIGHETSKURVE == True:
-        y_arr_1 = np.sort(timeserie_1)[::-1]
-        y_arr_2 = np.sort(timeserie_2)[::-1]
-        type_plot = "varighetskurve"
-    else:
-        y_arr_1 = timeserie_1
-        y_arr_2 = timeserie_2
-        type_plot = "timeplot"
-    x_arr = np.array(range(0, len(timeserie_1)))
-    fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr_1,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR_1),
-            name=f"{timeserie_1_navn}: {int(round(np.sum(y_arr_1),0)):,} kWh | {int(round(np.max(y_arr_1),0)):,} kW".replace(
-                ",", " "
-            ),
-        )
-    )
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr_2,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR_2),
-            name=f"{timeserie_2_navn}: {int(round(np.sum(y_arr_2),0)):,} kWh | {int(round(np.max(y_arr_2),0)):,} kW".replace(
-                ",", " "
-            ),
-        )
-    )
-    fig["data"][0]["showlegend"] = True
-    fig.update_xaxes(range=[0, 8760])
-    fig.update_yaxes(range=[0, (max(y_arr_1) + max(y_arr_2)) * 1.1])
-    fig.update_layout(barmode="stack")
-    fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
-    fig.update_layout(
-        xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
-    )
-
-
-def plot_3_timeserie(
-    timeserie_1,
-    timeserie_1_navn,
-    timeserie_2,
-    timeserie_2_navn,
-    timeserie_3,
-    timeserie_3_navn,
-    objektid,
-    filplassering,
-    COLOR_1="#1d3c34",
-    COLOR_2="#4d4b32",
-    COLOR_3="#4da452",
-    VARIGHETSKURVE=False,
-):
-    if VARIGHETSKURVE == True:
-        y_arr_1 = np.sort(timeserie_1)[::-1]
-        y_arr_2 = np.sort(timeserie_2)[::-1]
-        y_arr_3 = np.sort(timeserie_3)[::-1]
-        type_plot = "varighetskurve"
-    else:
-        y_arr_1 = timeserie_1
-        y_arr_2 = timeserie_2
-        y_arr_3 = timeserie_3
-        type_plot = "timeplot"
-    x_arr = np.array(range(0, len(timeserie_1)))
-    fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr_1,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR_1),
-            name=f"{timeserie_1_navn}: {int(round(np.sum(y_arr_1),0)):,} kWh | {int(round(np.max(y_arr_1),0)):,} kW".replace(
-                ",", " "
-            ),
-        )
-    )
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr_2,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR_2),
-            name=f"{timeserie_2_navn}: {int(round(np.sum(y_arr_2),0)):,} kWh | {int(round(np.max(y_arr_2),0)):,} kW".replace(
-                ",", " "
-            ),
-        )
-    )
-    fig.add_trace(
-        go.Scatter(
-            x=x_arr,
-            y=y_arr_3,
-            stackgroup="one",
-            fill="tonexty",
-            line=dict(width=0, color=COLOR_3),
-            name=f"{timeserie_3_navn}: {int(round(np.sum(y_arr_3),0)):,} kWh | {int(round(np.max(y_arr_2),0)):,} kW".replace(
-                ",", " "
-            ),
-        )
-    )
-    fig["data"][0]["showlegend"] = True
-    fig.update_xaxes(range=[0, 8760])
-    fig.update_yaxes(range=[0, (max(y_arr_1) + max(y_arr_2) + max(y_arr_3)) * 1.1])
-    fig.update_layout(barmode="stack")
-    fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
-    fig.update_layout(
-        xaxis_title="Timer i ett år", yaxis_title="Timesmidlet effekt [kWh/h]"
-    )
-
 
 # ---------------------------------------------------------------------------------------------------------------
 
@@ -465,7 +298,6 @@ class Energibehov:
             termisk_makseffekt,
         )
 
-    def _visualisering(self):
         FILPLASSERING = "plot"
         EL_SPESIFIKK_FARGE = "#b7dc8f"
         ROMOPPVARMING_FARGE = "#1d3c34"
@@ -603,7 +435,6 @@ class Fjernvarme:
         self.fjernvarme_arr = (self.termisk_arr) * self.VIRKNINGSGRAD
         self.df["Fjernvarme"] = self.fjernvarme_arr
 
-    def _visualisering(self):
         FILPLASSERING = "plot"
         FJERNVARME_FARGE = "#00FFFF"
         plot_1_timeserie(
@@ -662,14 +493,6 @@ class Grunnvarme:
         self.kompressor_arr = self.varmepumpe_arr - self.levert_fra_bronner_arr
         self.spisslast_arr = self.termisk_arr - self.varmepumpe_arr
         
-    def _visualisering(self):
-        FILPLASSERING = "plot"
-        KOMPRESSOR_FARGE = "#1d3c34"
-        LEVERT_FRA_BRONNER_FARGE = "#b7dc8f"
-        SPISSLAST_FARGE = "#FFC358"
-        plot_3_timeserie(timeserie_1=self.kompressor_arr, timeserie_1_navn="Strøm til varmepumpe", timeserie_2=self.levert_fra_bronner_arr, timeserie_2_navn="Levert fra brønner", timeserie_3=self.spisslast_arr, timeserie_3_navn="Spisslast", objektid=self.objektid, filplassering=FILPLASSERING, COLOR_1=KOMPRESSOR_FARGE, COLOR_2=LEVERT_FRA_BRONNER_FARGE, COLOR_3=SPISSLAST_FARGE)
-        plot_3_timeserie(timeserie_1=self.kompressor_arr, timeserie_1_navn="Strøm til varmepumpe", timeserie_2=self.levert_fra_bronner_arr, timeserie_2_navn="Levert fra brønner", timeserie_3=self.spisslast_arr, timeserie_3_navn="Spisslast", objektid=self.objektid, filplassering=FILPLASSERING, COLOR_1=KOMPRESSOR_FARGE, COLOR_2=LEVERT_FRA_BRONNER_FARGE, COLOR_3=SPISSLAST_FARGE, VARIGHETSKURVE=True)
-
     def _nokkeltall(self):
         kompressor_aarlig = avrunding(np.sum(self.kompressor_arr))
         levert_fra_bronner_aarlig = avrunding(np.sum(self.levert_fra_bronner_arr))
@@ -708,8 +531,7 @@ class LuftLuftVarmepumpe:
         self.levert_fra_luft_arr = self.varmepumpe_arr - self.varmepumpe_arr/self.COP #todo : timevariert COP, da må vi også hente inn informasjon om utetemperatur
         self.kompressor_arr = self.varmepumpe_arr - self.levert_fra_luft_arr
         self.spisslast_arr = self.termisk_arr - self.varmepumpe_arr
-        
-    def _visualisering(self):
+
         FILPLASSERING = "plot"
         KOMPRESSOR_FARGE = "#1d3c34"
         LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
@@ -809,17 +631,6 @@ class Solproduksjon:
         normalized_hourly_sum= sum(self._timeserier_dataframes)
         return normalized_hourly_sum.p_normal
 
-    def _visualisering(self):
-        FILPLASSERING = "plot"
-        SOL_FARGE = "#b7dc8f"
-        plot_1_timeserie(
-            self._timesserie(),
-            "Solproduksjon",
-            self.objektid,
-            FILPLASSERING,
-            COLOR=SOL_FARGE,
-        )
-
     def _nokkeltall(self):
         e_y_sum= sum([takflate_pv_objs.E_y_on_surface() for takflate_pv_objs in self.takflate_pv_objs.values()])
         return self.takflate_pv_objs, e_y_sum
@@ -918,7 +729,6 @@ class Energianalyse:
         self.df_before = positive_rows.sum(axis=1)
         self.df_after = self.new_df.sum(axis=1)
 
-    def _visualisering(self):
         FILPLASSERING = "plot"
         KOMPRESSOR_FARGE = "#1d3c34"
         LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
