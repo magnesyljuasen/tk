@@ -386,7 +386,7 @@ class Grunnvarme:
     def _lagring(self, timeserie_obj):
         timeserie_obj.legg_inn_timeserie(timeserie=-(self.levert_fra_bronner_arr + self.kompressor_arr),timeserie_navn=f"{self.behovstype}_grunnvarme")
         timeserie_obj.legg_inn_timeserie(timeserie=self.kompressor_arr,timeserie_navn=f"El_grunnvarme_kompressor")
-        timeserie_obj.legg_inn_timeserie(timeserie=self.spisslast_arr,timeserie_navn=f"El_kjel")
+        #timeserie_obj.legg_inn_timeserie(timeserie=self.spisslast_arr,timeserie_navn=f"El_kjel")
 
     def standard_metode(self, lagring_obj):
         self._beregn_grunnvarme()
