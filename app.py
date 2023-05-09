@@ -466,7 +466,7 @@ class Energibehov:
         )
 
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         EL_SPESIFIKK_FARGE = "#b7dc8f"
         ROMOPPVARMING_FARGE = "#1d3c34"
         TAPPEVANN_FARGE = "#FFC358"
@@ -604,7 +604,7 @@ class Fjernvarme:
         self.df["Fjernvarme"] = self.fjernvarme_arr
 
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         FJERNVARME_FARGE = "#00FFFF"
         plot_1_timeserie(
             self.fjernvarme_arr,
@@ -663,7 +663,7 @@ class Grunnvarme:
         self.spisslast_arr = self.termisk_arr - self.varmepumpe_arr
         
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         KOMPRESSOR_FARGE = "#1d3c34"
         LEVERT_FRA_BRONNER_FARGE = "#b7dc8f"
         SPISSLAST_FARGE = "#FFC358"
@@ -710,7 +710,7 @@ class LuftLuftVarmepumpe:
         self.spisslast_arr = self.termisk_arr - self.varmepumpe_arr
         
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         KOMPRESSOR_FARGE = "#1d3c34"
         LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
         SPISSLAST_FARGE = "#FFC358"
@@ -810,7 +810,7 @@ class Solproduksjon:
         return normalized_hourly_sum.p_normal
 
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         SOL_FARGE = "#b7dc8f"
         plot_1_timeserie(
             self._timesserie(),
@@ -919,7 +919,7 @@ class Energianalyse:
         self.df_after = self.new_df.sum(axis=1)
 
     def _visualisering(self):
-        FILPLASSERING = r"C:/Users/magne.syljuasen/Progg/INTOZERO2/"
+        FILPLASSERING = "plot"
         KOMPRESSOR_FARGE = "#1d3c34"
         LEVERT_FRA_LUFT_FARGE = "#b7dc8f"
         SPISSLAST_FARGE = "#FFC358"
